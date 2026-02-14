@@ -38,7 +38,7 @@ export default function Upload() {
       const formData = new FormData()
       files.forEach(f => formData.append('files', f))
       if (code.trim()) formData.append('code', code.trim())
-      const { data } = await api.post('/convert/', formData, {
+      const { data } = await api.post('convert/', formData, {
         headers: { 'Content-Type': 'multipart/form-data' },
       })
       sessionStorage.setItem('diagrams', JSON.stringify(data))
@@ -54,7 +54,7 @@ export default function Upload() {
     setLoading(true)
     setError('')
     try {
-      const { data } = await api.get('/examples/')
+      const { data } = await api.get('examples/')
       sessionStorage.setItem('diagrams', JSON.stringify(data))
       navigate('/diagrams')
     } catch {

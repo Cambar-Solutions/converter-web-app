@@ -8,7 +8,7 @@ export default function Admin() {
   useEffect(() => { loadUsers() }, [])
 
   const loadUsers = () => {
-    api.get('/auth/users/')
+    api.get('auth/users/')
       .then(res => setUsers(res.data))
       .catch(() => {})
       .finally(() => setLoading(false))
@@ -16,18 +16,18 @@ export default function Admin() {
 
   const toggleRole = async (user) => {
     const newRole = user.role === 'admin' ? 'analyst' : 'admin'
-    await api.patch(`/auth/users/${user.id}/`, { role: newRole })
+    await api.patch(`auth/users/${user.id}/`, { role: newRole })
     loadUsers()
   }
 
   const toggleActive = async (user) => {
-    await api.patch(`/auth/users/${user.id}/`, { is_active: !user.is_active })
+    await api.patch(`auth/users/${user.id}/`, { is_active: !user.is_active })
     loadUsers()
   }
 
   const deleteUser = async (user) => {
     if (!confirm(`Eliminar usuario ${user.email}?`)) return
-    await api.delete(`/auth/users/${user.id}/`)
+    await api.delete(`auth/users/${user.id}/`)
     loadUsers()
   }
 

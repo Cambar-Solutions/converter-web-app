@@ -11,21 +11,21 @@ export default function History() {
   const navigate = useNavigate()
 
   useEffect(() => {
-    api.get('/history/')
+    api.get('history/')
       .then(res => setEntries(res.data))
       .catch(() => {})
       .finally(() => setLoading(false))
   }, [])
 
   const viewEntry = async (id) => {
-    const { data } = await api.get(`/history/${id}/`)
+    const { data } = await api.get(`history/${id}/`)
     setSelected(data)
     setActiveTab('class')
   }
 
   const deleteEntry = async (id) => {
     if (!confirm('Eliminar este registro?')) return
-    await api.delete(`/history/${id}/`)
+    await api.delete(`history/${id}/`)
     setEntries(entries.filter(e => e.id !== id))
     if (selected?.id === id) setSelected(null)
   }
